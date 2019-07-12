@@ -110,6 +110,7 @@
         // 更换登录用户信息
         $(function(){
             $.ajax({
+                type:'get',//可以省略 默认值
                 url:"http://localhost:8000/admin/getuser",
                 success:function(backData){
                     if(backData.code == 200) {
@@ -127,7 +128,10 @@
                $.post({
                    url:"http://localhost:8000/admin/logout",
                    success:function(){
-                       location.href = "./login.html";
+                        //判断
+                        if(backData.code == 200){
+                            window.location.href = './login.html';
+                        }
                    }
 
                })

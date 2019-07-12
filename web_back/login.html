@@ -56,11 +56,15 @@
         $(function(){
             $(".input_sub").on("click",function(e){
                 e.preventDefault();
-                var userText = $(".input_txt").val();
-                var password = $(".input_pass").val();
+                var userText = $(".input_txt").val().trim();
+                var password = $(".input_pass").val().tirm();
                 if(userText == "" || password ==""){
                     // alert("输入的用户名或者密码为空");
                     $(".modal-body").text("您输入的用户名和密码为空");
+                    $('#myModal').modal({
+                        keyboard: true //键盘上的 esc 键被按下时关闭模态框
+                    })
+                    return;
                 }
                 $.post({
                     url:"http://localhost:8000/admin/login",
@@ -76,6 +80,9 @@
                         }else {
                             $(".modal-body").text("您输入的用户名和密码错误");
                             // alert("输入的用户名或者密码错误");
+                            $('#myModal').modal({
+                                keyboard: true //键盘上的 esc 键被按下时关闭模态框
+                            })
                         }
                         
 
