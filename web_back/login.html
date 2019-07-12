@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/iconfont.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css">
+    <script src="./js/jquery-1.12.4.min.js"></script>
 </head>
 
 <body>
@@ -29,8 +31,41 @@
             </form>
         </div>
 
-    </div> 
+    </div>
+    <script>
+        $(function(){
+            $(".input_sub").on("click",function(e){
+                e.preventDefault();
+                var userText = $(".input_txt").val();
+                var password = $(".input_pass").val();
+                if(userText == "" || password ==""){
+                    alert("输入的用户名或者密码为空");
+                }
+                $.post({
+                    url:"http://localhost:8000/admin/login",
+                    data:{
+                        user_name:userText,
+                        password:password,
 
+                    },
+                    success:function(backDate){
+                        console.log(backDate);
+                        if(backDate.code == 200) {
+                            alert("登录成功");
+                            location.href="index.html";
+                        }else {
+                            alert("输入的用户名或者密码错误");
+                        }
+                        
+
+                    }
+                })
+
+            })
+        })
+    </script>
+   
+    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
